@@ -1,0 +1,32 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+<div id="booking" class="d-flex flex-column flex-lg-row justify-content-end align-items-center p-4">
+    <div class="bg-light card">
+        <div class="mb-3 card-header px-3 pt-3">
+            <h4>{{bus.name}}</h4>
+            <p>From: {{bus.start_point}}</p>
+            <p>To: {{bus.end_point}}</p>
+            <p>Price: {{bus.price}}</p>
+            <p>Bus will go in {{bus.deperture_date}}</p>
+        </div>
+        <div class="card-body mb-3 px-3">
+            <form action="{% url 'bookingcreate' bus.id%}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="">How many person?</label>
+                    <input type="text" name="person" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="">Enter your credit card</label>
+                    <input type="text" name="credit" class="form-control">
+                </div>
+                <input type="submit" value="Book" class="btn btn-primary">   
+            </form>
+        </div>
+        <div class="card-footer px-3 pb-3">
+            <p>If you want to find different buses, go to <a href="{% url 'buseslist' %}">bus</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

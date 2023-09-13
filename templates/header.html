@@ -1,0 +1,48 @@
+<header>
+  <nav class="navbar navbar-expand-lg px-3 navbar-dark container">
+    <div class="d-flex flex-row justify-content-between align-items-center w-100">
+        <div>
+            <a class="navbar-brand" href="#">TRAVOLO</a>
+        </div>
+        <ul class="navbar-nav d-none d-lg-flex">
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="{% url 'postlist' %}">Posts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="{% url 'buseslist' %}">Buses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="{% url 'bookinglists' %}">Bookings</a>
+          </li>
+        </ul>
+        {% if user.is_authenticated %}
+        <div class="d-flex flex-row justify-content-start align-items-center">
+          <p class="text-light mb-0 me-2">login as {{user.username}}</p>
+          <a href="{% url 'logout' %}" class="btn btn-outline-light me-2">logout</a>
+          <a style="background-color: transparent;" class="d-block d-lg-none btn btn-outline-light" type="button" data-bs-toggle="offcanvas" href="#offcanvasRight" aria-controls="offcanvasRight"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+          </svg></a>
+        </div>
+        
+        {% else %}
+      <div class="d-flex flex-row justify-content-start">
+        <a href="{% url 'login' %}" class="btn btn-outline-light me-2">login</a>
+        <a href="{% url 'signup' %}" class="btn btn-outline-light me-2">sign up</a>
+        <a style="background-color: transparent;" class="d-block d-lg-none btn btn-outline-light" type="button" data-bs-toggle="offcanvas" href="#offcanvasRight" aria-controls="offcanvasRight"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg></a>
+      </div>
+      {% endif %}
+    </div>
+  </nav>
+  <div id="about" class="container text-center">
+    <p class=" text-light fw-bold">
+      Travalo is the travel agency that can service your travel all over <strong>Myanmar</strong>.<br/>
+      Whenever you have business trip, visit or vacation, you can buy your ticket here.
+      We can ensure your trip 100% safety and reach your destination you want. 
+    </p>
+  </div>
+</header>

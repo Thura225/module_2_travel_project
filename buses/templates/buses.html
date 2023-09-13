@@ -1,0 +1,60 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+{% if user.is_superuser %}
+<div class="container mt-5">
+    <a href="{% url 'buscreate'%}" class="btn btn-success">Create New Bus</a>
+</div>
+{% endif %}
+
+<div class="container mt-5 shadow-lg p-3 rounded">
+    <h2 class="text-center mb-3">Find Your Bus</h2>
+    <form action="{% url 'buseslist'%}" method="post" class=" d-flex flex-row justify-content-center align-items-center">
+        {% csrf_token %}
+        <div class="me-2">
+            <label>From:</label>
+            <select name="start" id="bus-start-point">
+                {% for k,v in points%}
+                <option value="{{k}}">{{v}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="me-2">
+            <label>To:</label>
+            <select name="end" id="bus-end-point">
+                {% for k,v in points%}
+                <option value="{{k}}">{{v}}</option>
+                {% endfor %}
+            </select>
+            <br>
+        </div>
+        <input type="submit" value="Search" class="btn btn-success">
+    </form>
+</div>
+<div class="container mt-5">
+    <h2>Results</h2>
+    <hr>
+    {% if buses %}
+    {% for bus in buses %}
+
+    <div class="card mt-5 mb-5">
+        <div class="card-header">
+            <h4 class="card-title">{{bus.name}}</h4>
+        </div>
+        <div class="card-body">
+            <p>Deperture Date: <strong>{{ bus.deperture_date }}</strong></p>
+            <p>From <strong>{{bus.start_point}}</strong> to <strong>{{bus.end_point}}</strong></p>
+            <p>Price:<strong>${{bus.price}}</strong></p>
+        </div>
+        <div class="card-footer">
+            {% if user.is_superuser %}
+            <a href="{% url 'busupdate' bus.id%}" class="btn btn-info">Update</a>
+            <a href="{% url 'busdelete' bus.id%}" class="btn btn-danger text-light">Delete</a>
+            {% endif %}
+            <a href="/bookings/buses/{{bus.id}}/create" class="btn btn-primary">Go to Book</a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

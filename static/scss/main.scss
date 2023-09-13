@@ -1,0 +1,39 @@
+$primary:#944300;
+$secondary:#f5f5f5;
+$success:#2bff00;
+$warning:#ffd000;
+$danger:#ff0000;
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+header{
+    height: 500px;
+    position: relative;
+    background-image: url(../../media/bagan2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 -100px;
+    nav{
+        position:absolute;
+        top: 50px;
+    }
+    #about{
+        position: absolute;
+        top: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+#booking{
+    background-image: url('../../media/express.jpg');
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: -60px;
+    width: 100%;
+    border: 1px solid red;
+    .card{
+        min-width: 50%;
+    }
+}

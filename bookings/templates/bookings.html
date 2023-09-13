@@ -1,0 +1,24 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    {% for booking in bookings %}
+    {% if user.id == booking.buyer.id %}
+    <div class="card mt-5 mb-5">
+        <div class="card-header">
+            <h5 class="card-title">{{booking.bus.name}}</h5>
+        </div>
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ booking.buyer.username }}</h6>
+            <p class="card-text mt-3">From {{booking.bus.start_point}} To {{booking.bus.end_point}}</p>
+            <p class="card-text mt-3">Price: ${{booking.bus.price}}</p>
+            <p class="card-text text-danger">Please prepare until <strong>{{booking.bus.deperture_date}}</strong></p>
+        </div>
+        <div class="card-header">
+            <a class="btn btn-danger text-light" href="{% url 'bookingdelete' booking.id %}">Delete</a>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base2.html'%}
+
+{% block content %}
+<div class="container mt-2">
+<h3>Create Your Bus</h3>
+<form action="{% url 'busupdate' bus.id%}" method="post" class="mt-3">
+    {% csrf_token %}
+    <div class="mb-2">
+        <label>Name</label>
+        <input type="text" name="bus_name" value="{{bus.name}}" class="form-control"/>
+    </div>
+    <div class="mb-2">
+        <label>From</label>
+        <select name="start_point" id="bus-start-point" class="form-control">
+            {% for k,v in points%}
+            {% if k == bus.start_point %}
+            <option value="{{k}}" selected>{{v}}</option>
+            {% else %}
+            <option value="{{k}}">{{v}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-2">
+        <label>To</label>
+        <select name="end_point" id="bus-end-point" class="form-control">
+            {% for k,v in points%}
+            {% if k == bus.end_point %}
+            <option value="{{k}}" selected>{{v}}</option>
+            {% else %}
+            <option value="{{k}}">{{v}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-2">
+        <label>Price</label>
+        <input type="number" name="price" value="{{bus.price}}" class="form-control"/>
+    </div>
+    <div class="mb-2">
+        <label>Deperture Date</label>
+        <input type="date" name="deperture_date" value="{{bus.deperture_date}}" class="form-control" pattern="YYYY-mm-dd">
+    </div>
+    <input type="submit" value="Update" class="btn btn-success">
+</form>
+</div>
+{% endblock %}

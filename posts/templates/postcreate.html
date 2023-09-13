@@ -1,0 +1,23 @@
+{% extends 'base2.html'%}
+
+{% block content %}
+<div class="container mt-2">
+<h3>Create Your Post</h3>
+<form action="{% url 'postcreate' %}" method="post" class="mt-3">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label><br>
+        {{form.title}}
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Content</label><br>
+        {{form.content}}
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Image</label><br>
+        {{form.image}}
+    </div>
+    <input type="submit" value="Post" class="btn btn-success">
+</form>
+</div>
+{% endblock %}

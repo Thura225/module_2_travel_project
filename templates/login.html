@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="card mt-5 container p-0">
+        <div class="card-header bg-primary">
+            <h1 class="card-title text-light">Login</h1>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label><br>
+                    <input type="text" name="username" class="form-control" placeholder="Enter your username"/>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label><br>
+                    <input type="password" name="password" class="form-control" placeholder="Enter your username"/>
+                </div>
+                <input type="submit" value="Login" class="btn btn-success" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+   

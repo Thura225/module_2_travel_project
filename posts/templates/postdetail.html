@@ -1,0 +1,57 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card mt-5 mb-5">
+        <div class="card-body">
+            <h5 class="card-title">{{post.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ post.created_at }}</h6>
+            {% if post.image %}
+            <img src="/media/{{post.image}}" class="mt-3" alt="" style="height:300px;">
+            {% endif %}
+            <p class="card-text mt-3">{{post.content}}</p>
+        </div>
+        {% if user.is_superuser %}
+        <div class="card-footer">   
+            <a href="{% url 'postupdate' post.id%}" class="btn btn-info">Update</a>
+            <a href="{% url 'postdelete' post.id%}" class="btn btn-danger text-light">Delete</a>    
+        </div>
+        {% endif %}
+    </div>
+    <div class="container mb-3">
+        <form action="{% url 'commentcreate' post.id%}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{form.as_p}}
+            </div>
+            <input type="submit" value="Comment" class="btn btn-success">
+        </form>
+    </div>
+    <div class="container mb-3">
+        {% for comment in comments %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4>{{comment.author.username}}</h4>
+                <p class="card-text">{{comment.content}}</p>
+            </div>
+            {% if user.id == comment.author.id %}
+            <div class="card-footer">
+                <p class="d-inline-flex gap-1">    
+                    <a class="btn btn-info" data-bs-toggle="collapse" href="#commentCollapse">Edit</a>
+                    <a href="/posts/{{post.id}}/cmt/{{comment.id}}/delete/" class="btn btn-danger text-light">Delete</a>
+                </p>
+                <div class="collapse" id="commentCollapse">
+                    <form action="/posts/{{post.id}}/cmt/{{comment.id}}/update/" method="post" class="container-fluid d-inline-flex">
+                        {% csrf_token %}
+                        <textarea name="cmt" class="form-control me-2" style="height:50px;">{{comment.content}}</textarea>
+                        <input type="submit" class="btn btn-primary" value="Update"/>
+                    </form>
+                </div>
+            </div> 
+            {% endif %} 
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
